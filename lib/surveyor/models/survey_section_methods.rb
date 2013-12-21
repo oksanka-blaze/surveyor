@@ -5,6 +5,8 @@ module Surveyor
       include ActiveModel::Validations
 
       included do
+        #Scope
+        scope :with_includes, -> { includes({:questions => [:answers, :question_group, {:dependency => :dependency_conditions}]})}
         # Associations
         has_many :questions, :dependent => :destroy
         belongs_to :survey
